@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = styled.header`
@@ -24,6 +24,10 @@ const Item = styled.li`
   width: 80px;
   height: 50px;
   text-align: center;
+  border-bottom: 3px solid
+  //색 변경이 어떻게 진행되는지 이렇게 {props}전달할 수 있다.
+  ${props => (props.current ? "#3498db" : "transparent")};
+  transition: border-bottom 0.5s ease-in-out;
 `;
 
 const SLink = styled(Link)`
@@ -33,18 +37,19 @@ const SLink = styled(Link)`
   justify-content: center;
 `;
 
-export default () => (
+export default withRouter(({ location: { pathname } }) => (
     <Header>
         <List>
-            <Item>
+            {/*withRouter 사용 아이템이 어떻게 변화하는지 체크용 */}
+            <Item current={pathname === "/"}>
                 <SLink to="/">Movies</SLink>
             </Item>
-            <Item>
+            <Item current={pathname === "/tv"}>
                 <SLink to="/tv">TV</SLink>
             </Item>
-            <Item>
+            <Item current={pathname === "/search"}>
                 <SLink to="/search">Search</SLink>
             </Item>
         </List>
     </Header>
-);
+));
