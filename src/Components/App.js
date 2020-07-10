@@ -1,16 +1,8 @@
-import React, { Component } from "react";
-import Router from "Components/Router";
-import GlobalStyles from "./GlobalStyles"
+import React from "react";
+import InputSample from "./InputSample";
 
-class App extends Component {
-  render() {
-    return (
-        <>
-          <Router />
-          <GlobalStyles/>
-        </>
-    );
-  }
+function App() {
+    return <InputSample />;
 }
 
 export default App;
