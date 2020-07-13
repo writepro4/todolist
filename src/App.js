@@ -1,85 +1,35 @@
-import React, { useRef, useState } from 'react';
-import UserList from './UserList';
-import CreateUser from './CreateUser';
+import React, {Component} from "react";
+import PageTemplate from "./components/Pagetemplate";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
-function App() {
-    const [inputs, setInputs] = useState({
-        username: '',
-        email: ''
-    });
-    const { username, email } = inputs;
-    const onChange = e => {
-        const { name, value } = e.target;
-        setInputs({
-            ...inputs,
-            [name]: value
-        });
-    };
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            username: 'velopert',
-            email: 'public.velopert@gmail.com',
-            active: true
-        },
-        {
-            id: 2,
-            username: 'tester',
-            email: 'tester@example.com',
-            active: false
-        },
-        {
-            id: 3,
-            username: 'liz',
-            email: 'liz@example.com',
-            active: false
-        }
-    ]);
-
-    const nextId = useRef(4);
-    const onCreate = () => {
-        const user = {
-            id: nextId.current,
-            username,
-            email
-        };
-        setUsers(users.concat(user));
-
-        setInputs({
-            username: '',
-            email: ''
-        });
-        nextId.current += 1;
-    };
-
-    const onRemove = id => {
-        // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-        // = user.id 가 id 인 것을 제거함
-        setUsers(users.filter(user => user.id !== id));
-    };
-    const onFix = id=>{
-        // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-        // = user.id 가 id 인 것을 제거함
-        setUsers(users.filter(user=> user.id !== id));
+class App extends Component {
+    state = {
+        input: '', //input 값은 일단 비워둔다.
+        //앞으로 todoItem값을 todos라는 배열에서 관리하도록 state를 만듬.
+        //상위컴포넌트인 App에서 관리함이 포인트
+        todos: [
+            //미리 요소 두개 만들어둠
+            {id: 0, text: '리액트 공부하기', done: true},
+            {id: 1, text: '컴포넌트 스타일링', done: false}
+        ]
     }
-    const onToggle = id => {
-        setUsers(
-            users.map(user =>
-                user.id === id ? { ...user, active: !user.active } : user
-            )
-        );
-    };
-    return (
-        <>
-            <CreateUser
-                username={username}
-                email={email}
-                onChange={onChange}
-                onCreate={onCreate}
-            />
-            <UserList users={users} onRemove={onRemove} onToggle={onToggle} onFix={onFix}/>
-        </>
-    );
+
+//TodoItem 데이터 안에 들어가는 id 값,
+    //getId는 현재의 값에서 1을 더한 값을 반환
+    id = 1
+    getId=() => {
+        return ++this.id;
+    }
+
+    render() {
+        return (
+            <PageTemplate>
+                <TodoInput/>
+                <TodoList/>
+            </PageTemplate>
+        )
+    }
 }
 
 export default App;
