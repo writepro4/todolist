@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PageTemplate from "./components/Pagetemplate";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import Event from "./components/event";
 
 class App extends Component {
     state = {
@@ -16,18 +17,18 @@ class App extends Component {
 //TodoItem 데이터 안에 들어가는 id 값,
     //getId는 현재의 값에서 1을 더한 값을 반환
     id = 1
-    getId=() => {
+    getId = () => {
         return ++this.id;
     }
 
     //handleChange는 input에 들어가는 값이 변했을 떄를 말하는데
-    handleChange = (e) =>{
+    handleChange = (e) => {
         //value값은 이벤트가 일어나는 값의 target으로 변수 설정
         const {value} = e.target;
         //따라서 state를 관리하는데 이 때 input의 state에 들어가는 값은
         //위에서 설정해둔 value값
         this.setState({
-            input : value
+            input: value
         })
     }
 
@@ -40,9 +41,9 @@ class App extends Component {
         //newTodo라는 변수는, 새로운 객체를 만들어주는것.
         //handleInsert가 불러오면 바로 생성됨.
         const newTodo = {
-            text:input,
-            done:false,
-            id:this.getId()
+            text: input,
+            done: false,
+            id: this.getId()
         }
 
         //newTodo로 새로운 객체가 만들어졌다면,
@@ -51,7 +52,7 @@ class App extends Component {
         //설정해준 값대로 배열에 들어감.
         //그리고나서 이제 input값을 초기화해준다.
         this.setState({
-            todos : [...todos, newTodo],
+            todos: [...todos, newTodo],
             input: ''
         });
     }
@@ -69,31 +70,33 @@ class App extends Component {
             done: !todos[index].done
         };
 
+        console.log(todos);
         //그리고 나서 찾은 index값을 제외하고 todos에 다 넣는다. donx된거는 따로
         this.setState({
-            todos:[
+            todos: [
                 ...todos.slice(0, index),
                 toggled,
-                ...todos.slice(index +1, todos.length)
+                ...todos.slice(index + 1, todos.length)
             ]
         })
+        console.log(todos);
+
     }
 
     //id값을 받아서 해당 데이터를 지우는 이벤트를 만든다.
-    handleRemove =(id) => {
+    handleRemove = (id) => {
         console.log("지웁니다.")
         const {todos} = this.state;
-        const index = todos.findIndex(todo=> todo.id === id);
+        const index = todos.findIndex(todo => todo.id === id);
 
         //이번에는 state인 todos안에 해당하는 값의 index를 아예 다 지워버림
         this.setState({
-            todos : [
+            todos: [
                 ...todos.slice(0, index),
-                ...todos.slice(index+1, todos.length)
+                ...todos.slice(index + 1, todos.length)
             ]
         })
     }
-
 
 
     render() {
@@ -104,15 +107,19 @@ class App extends Component {
             handleInsert,
             handleToggle,
             handleRemove
-        } =this;
+        } = this;
         return (
-            <PageTemplate>
-                <TodoInput onChange={handleChange}
-                           onInsert={handleInsert}
-                           value={input}
-                />
-                <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
-            </PageTemplate>
+            <>
+                <PageTemplate>
+                    <TodoInput onChange={handleChange}
+                               onInsert={handleInsert}
+                               value={input}
+                    />
+                    <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+                </PageTemplate>
+                <Event/>
+            </>
+
         )
     }
 }
