@@ -1,0 +1,14 @@
+body{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    margin-top:200px;
+}
+
+.success{
+    background-color:lightgreen;
+}
+
+.failure{
+    background-color: lightcoral;
+}

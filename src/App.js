@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import PageTemplate from "./components/Pagetemplate";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
-import Event from "./components/event";
+// import Event from "./components/event";
+// import ValidationSample from "./components/ValidationSample";
 
 class App extends Component {
     state = {
@@ -117,7 +118,6 @@ class App extends Component {
                     />
                     <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
                 </PageTemplate>
-                <Event/>
             </>
 
         )
