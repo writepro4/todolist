@@ -5,7 +5,8 @@ import TodoList from "./components/TodoList";
 // import Event from "./components/event";
 // import ValidationSample from "./components/ValidationSample";
 // import ScrollBox from "./components/ScrollBox";
-import MapExample from "./components/MapExample";
+// import MapExample from "./components/MapExample";
+// import FunctionType from "./components/FunctionType";
 
 class App extends Component {
     state = {
@@ -120,10 +121,6 @@ class App extends Component {
                     />
                     <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
                 </PageTemplate>
-
-                <div>
-                    <MapExample/>
-                </div>
             </>
 
         )
