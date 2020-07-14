@@ -6,8 +6,6 @@ import TodoList from "./components/TodoList";
 class App extends Component {
     state = {
         input: '', //input 값은 일단 비워둔다.
-        //앞으로 todoItem값을 todos라는 배열에서 관리하도록 state를 만듬.
-        //상위컴포넌트인 App에서 관리함이 포인트
         todos: [
             //미리 요소 두개 만들어둠
             {id: 0, text: '리액트 공부하기', done: true},
@@ -58,17 +56,62 @@ class App extends Component {
         });
     }
 
+    //id로 배열의 인덱스를 찾는 함수를 만든다. 이게 바로 done으로 상태를 바꾸는 이벤트.
+    handleToggle = (id) => {
+        const {todos} = this.state;
+
+        //index라는 변수는 todos배열에서 찾는건데,
+        const index = todos.findIndex(todo => todo.id === id);
+
+        //toggled은 찾은 index의 값의 done값을 반전시키도록 만든다.
+        const toggled = {
+            ...todos[index],
+            done: !todos[index].done
+        };
+
+        //그리고 나서 찾은 index값을 제외하고 todos에 다 넣는다. donx된거는 따로
+        this.setState({
+            todos:[
+                ...todos.slice(0, index),
+                toggled,
+                ...todos.slice(index +1, todos.length)
+            ]
+        })
+    }
+
+    //id값을 받아서 해당 데이터를 지우는 이벤트를 만든다.
+    handleRemove =(id) => {
+        console.log("지웁니다.")
+        const {todos} = this.state;
+        const index = todos.findIndex(todo=> todo.id === id);
+
+        //이번에는 state인 todos안에 해당하는 값의 index를 아예 다 지워버림
+        this.setState({
+            todos : [
+                ...todos.slice(0, index),
+                ...todos.slice(index+1, todos.length)
+            ]
+        })
+    }
+
+
+
     render() {
         //마찬가지로 레퍼런스를 미리 설정해둠
         const {input, todos} = this.state;
         const {
             handleChange,
-            handleInsert
+            handleInsert,
+            handleToggle,
+            handleRemove
         } =this;
         return (
             <PageTemplate>
-                <TodoInput onChange={handleChange} onInsert={handleInsert} value={input}/>
-                <TodoList todos={todos}/>
+                <TodoInput onChange={handleChange}
+                           onInsert={handleInsert}
+                           value={input}
+                />
+                <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
             </PageTemplate>
         )
     }
