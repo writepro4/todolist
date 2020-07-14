@@ -4,7 +4,8 @@ import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 // import Event from "./components/event";
 // import ValidationSample from "./components/ValidationSample";
-import ScrollBox from "./components/ScrollBox";
+// import ScrollBox from "./components/ScrollBox";
+import MapExample from "./components/MapExample";
 
 class App extends Component {
     state = {
@@ -119,10 +120,9 @@ class App extends Component {
                     />
                     <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
                 </PageTemplate>
+
                 <div>
-                    <ScrollBox ref={(ref)=>this.ScrollBox=ref}/>
-                    <button onClick={() =>
-                        this.ScrollBox.scrollToBottom()}>맨 밑으로</button>
+                    <MapExample/>
                 </div>
             </>
 
