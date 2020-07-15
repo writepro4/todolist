@@ -7,6 +7,7 @@ import TodoList from "./components/TodoList";
 // import ScrollBox from "./components/ScrollBox";
 // import MapExample from "./components/MapExample";
 // import FunctionType from "./components/FunctionType";
+import HooksUseEffect from "./components/useEffectExample";
 
 class App extends Component {
     state = {
@@ -121,6 +122,7 @@ class App extends Component {
                     />
                     <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
                 </PageTemplate>
+                <HooksUseEffect/>
             </>
 
         )
