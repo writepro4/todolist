@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
 import PageTemplate from "./components/Pagetemplate";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
@@ -9,6 +10,8 @@ import TodoList from "./components/TodoList";
 // import FunctionType from "./components/FunctionType";
 // import HooksUseEffect from "./components/useEffectExample";
 // import HooksUseTitle from "./components/UseTitleExample";
+// import HooksUseClick from "./components/useClickExample";
+import {Home, About} from "./router";
 
 class App extends Component {
     state = {
@@ -115,15 +118,22 @@ class App extends Component {
             handleRemove
         } = this;
         return (
-            <>
+
+            <BrowserRouter>
                 <PageTemplate>
                     <TodoInput onChange={handleChange}
                                onInsert={handleInsert}
                                value={input}
                     />
                     <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+
                 </PageTemplate>
-            </>
+
+
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/about" component={About}/>
+            </BrowserRouter>
+
 
         )
     }
