@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 
 const HooksUseEffect =() =>{
     const sayHello =() =>console.log("Hello")
-    useEffect( () =>sayHello() );
+    useEffect( () =>sayHello(),[]);
 
 
     const [number, setNumber] = useState(0)
