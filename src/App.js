@@ -14,6 +14,8 @@ import {Home, About, Menu} from './router'
 // import HooksUseTitle from "./components/UseTitleExample";
 // import HooksUseClick from "./components/useClickExample";
 // import {Home, About} from "./router";
+import RSPHooks from "./components/RockPaperScissors";
+
 
 class App extends Component {
     // state = {
@@ -145,44 +147,49 @@ class App extends Component {
 
 
     //끝말잇기 게임 부분
-    state = {
-        word: "리액트",
-        value: '',
-        result: ''
-    }
+    // state = {
+    //     word: "리액트",
+    //     value: '',
+    //     result: ''
+    // }
+    //
+    // onSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (this.state.word[this.state.word.length - 1] === this.state.value[0]) {
+    //         this.setState(
+    //             {
+    //                 result: '정답입니당.',
+    //                 word: this.state.value,
+    //                 value: ''
+    //             })
+    //         this.input.focus()
+    //     } else {
+    //         this.setState({
+    //             result: '틀렸습니다.',
+    //             value: ''
+    //         })
+    //         this.input.focus()
+    //     }
+    // }
+    //
+    // onChangeInput = (e) => {
+    //     this.setState({
+    //         value: e.target.value
+    //     })
+    // }
+    //
+    //
+    // //이게 뭐징???
+    // // input;
+    //
+    // onRefInput = (c) => {
+    //     this.input = c
+    // }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        if (this.state.word[this.state.word.length - 1] === this.state.value[0]) {
-            this.setState(
-                {
-                    result: '정답입니당.',
-                    word: this.state.value,
-                    value: ''
-                })
-            this.input.focus()
-        } else {
-            this.setState({
-                result: '틀렸습니다.',
-                value: ''
-            })
-            this.input.focus()
-        }
-    }
-
-    onChangeInput = (e) => {
-        this.setState({
-            value: e.target.value
-        })
-    }
 
 
-    //이게 뭐징???
-    // input;
 
-    onRefInput = (c) => {
-        this.input = c
-    }
+
 
     render() {
 
@@ -224,6 +231,7 @@ class App extends Component {
                     <Route path="/about/:name" component={About}/>
                 </Switch>
 
+                <RSPHooks/>
                 {/*<div>*/}
                 {/*    {this.state.first}곱하기{this.state.second}는?*/}
                 {/*    <form onSubmit={this.onSubmit}>*/}
@@ -233,12 +241,12 @@ class App extends Component {
                 {/*    <div>{this.state.result}</div>*/}
                 {/*</div>*/}
 
-                <div>{this.state.word}</div>
-                <form onSubmit={this.onSubmit}>
-                    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput}/>
-                    <button>입력</button>
-                </form>
-                <div>{this.state.result}</div>
+                {/*<div>{this.state.word}</div>*/}
+                {/*<form onSubmit={this.onSubmit}>*/}
+                {/*    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput}/>*/}
+                {/*    <button>입력</button>*/}
+                {/*</form>*/}
+                {/*<div>{this.state.result}</div>*/}
             </BrowserRouter>
         )
     }
