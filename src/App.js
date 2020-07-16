@@ -1,8 +1,10 @@
 import React, {Component} from "react";
-import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
-import PageTemplate from "./components/Pagetemplate";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Home, About, Menu} from './router'
+// import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
+// import PageTemplate from "./components/Pagetemplate";
+// import TodoInput from "./components/TodoInput";
+// import TodoList from "./components/TodoList";
 // import Event from "./components/event";
 // import ValidationSample from "./components/ValidationSample";
 // import ScrollBox from "./components/ScrollBox";
@@ -11,17 +13,17 @@ import TodoList from "./components/TodoList";
 // import HooksUseEffect from "./components/useEffectExample";
 // import HooksUseTitle from "./components/UseTitleExample";
 // import HooksUseClick from "./components/useClickExample";
-import {Home, About} from "./router";
+// import {Home, About} from "./router";
 
 class App extends Component {
-    state = {
-        input: '', //input 값은 일단 비워둔다.
-        todos: [
-            //미리 요소 두개 만들어둠
-            {id: 0, text: '리액트 공부하기', done: true},
-            {id: 1, text: '컴포넌트 스타일링', done: false}
-        ]
-    }
+    // state = {
+    //     input: '', //input 값은 일단 비워둔다.
+    //     todos: [
+    //         //미리 요소 두개 만들어둠
+    //         {id: 0, text: '리액트 공부하기', done: true},
+    //         {id: 1, text: '컴포넌트 스타일링', done: false}
+    //     ]
+    // }
 
 //TodoItem 데이터 안에 들어가는 id 값,
     //getId는 현재의 값에서 1을 더한 값을 반환
@@ -107,34 +109,93 @@ class App extends Component {
         })
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: '',
+            result: ''
+        }
+        console.log(this.state)
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        if (parseInt(this.state.value) === this.state.first * this.state.second) {
+            this.setState({
+                result: '정답',
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: ''
+            })
+            console.log(this.setState)
+            console.log(this.state)
+        } else {
+            this.setState({
+                result: "틀렷습니다.",
+                value: ''
+            })
+        }
+
+        console.log(this.state)
+    }
+
+    onChnage = (e) => this.setState({value: e.target.value})
+
+
+    state = {}
+
 
     render() {
+
         //마찬가지로 레퍼런스를 미리 설정해둠
-        const {input, todos} = this.state;
-        const {
-            handleChange,
-            handleInsert,
-            handleToggle,
-            handleRemove
-        } = this;
+        // const {input, todos} = this.state;
+        // const {
+        //     handleChange,
+        //     handleInsert,
+        //     handleToggle,
+        //     handleRemove
+        // } = this;
+        // return (
+        //
+        //     <BrowserRouter>
+        //         <PageTemplate>
+        //             <TodoInput onChange={handleChange}
+        //                        onInsert={handleInsert}
+        //                        value={input}
+        //             />
+        //             <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+        //
+        //         </PageTemplate>
+        //
+        //
+        //         <Route exact path="/" component={Home}/>
+        //         <Route exact path="/about" component={About}/>
+        //     </BrowserRouter>
+        //
+        //
+        // )
+
+
         return (
-
             <BrowserRouter>
-                <PageTemplate>
-                    <TodoInput onChange={handleChange}
-                               onInsert={handleInsert}
-                               value={input}
-                    />
-                    <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
-
-                </PageTemplate>
-
-
+                <Menu/>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/about" component={About}/>
+                <Switch>
+                    <Route path="/about" component={About}/>
+                    <Route path="/about/:name" component={About}/>
+                </Switch>
+
+                <div>
+                    {this.state.first}곱하기{this.state.second}는?
+                    <form onSubmit={this.onSubmit}>
+                        <input type="number" value={this.state.value} onChange={this.onChnage}/>
+                        <button>입력</button>
+                    </form>
+                    <div>{this.state.result}</div>
+                </div>
             </BrowserRouter>
-
-
         )
     }
 }
