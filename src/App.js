@@ -109,43 +109,80 @@ class App extends Component {
         })
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            first: Math.ceil(Math.random() * 9),
-            second: Math.ceil(Math.random() * 9),
-            value: '',
-            result: ''
-        }
-        console.log(this.state)
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         first: Math.ceil(Math.random() * 9),
+    //         second: Math.ceil(Math.random() * 9),
+    //         value: '',
+    //         result: ''
+    //     }
+    //     console.log(this.state)
+    // }
+
+    // onSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (parseInt(this.state.value) === this.state.first * this.state.second) {
+    //         this.setState({
+    //             result: '정답',
+    //             first: Math.ceil(Math.random() * 9),
+    //             second: Math.ceil(Math.random() * 9),
+    //             value: ''
+    //         })
+    //         console.log(this.setState)
+    //         console.log(this.state)
+    //     } else {
+    //         this.setState({
+    //             result: "틀렷습니다.",
+    //             value: ''
+    //         })
+    //     }
+    //
+    //     console.log(this.state)
+    // }
+
+    // onChnage = (e) => this.setState({value: e.target.value})
+
+
+    //끝말잇기 게임 부분
+    state = {
+        word: "리액트",
+        value: '',
+        result: ''
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (parseInt(this.state.value) === this.state.first * this.state.second) {
-            this.setState({
-                result: '정답',
-                first: Math.ceil(Math.random() * 9),
-                second: Math.ceil(Math.random() * 9),
-                value: ''
-            })
-            console.log(this.setState)
-            console.log(this.state)
+        if (this.state.word[this.state.word.length - 1] === this.state.value[0]) {
+            this.setState(
+                {
+                    result: '정답입니당.',
+                    word: this.state.value,
+                    value: ''
+                })
+            this.input.focus()
         } else {
             this.setState({
-                result: "틀렷습니다.",
+                result: '틀렸습니다.',
                 value: ''
             })
+            this.input.focus()
         }
-
-        console.log(this.state)
     }
 
-    onChnage = (e) => this.setState({value: e.target.value})
+    onChangeInput = (e) => {
+        this.setState({
+            value: e.target.value
+        })
+    }
 
 
-    state = {}
+    //이게 뭐징???
+    // input;
 
+    onRefInput = (c) => {
+        this.input = c
+    }
 
     render() {
 
@@ -187,14 +224,21 @@ class App extends Component {
                     <Route path="/about/:name" component={About}/>
                 </Switch>
 
-                <div>
-                    {this.state.first}곱하기{this.state.second}는?
-                    <form onSubmit={this.onSubmit}>
-                        <input type="number" value={this.state.value} onChange={this.onChnage}/>
-                        <button>입력</button>
-                    </form>
-                    <div>{this.state.result}</div>
-                </div>
+                {/*<div>*/}
+                {/*    {this.state.first}곱하기{this.state.second}는?*/}
+                {/*    <form onSubmit={this.onSubmit}>*/}
+                {/*        <input type="number" value={this.state.value} onChange={this.onChnage}/>*/}
+                {/*        <button>입력</button>*/}
+                {/*    </form>*/}
+                {/*    <div>{this.state.result}</div>*/}
+                {/*</div>*/}
+
+                <div>{this.state.word}</div>
+                <form onSubmit={this.onSubmit}>
+                    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput}/>
+                    <button>입력</button>
+                </form>
+                <div>{this.state.result}</div>
             </BrowserRouter>
         )
     }
