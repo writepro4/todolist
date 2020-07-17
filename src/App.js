@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {Home, About, Menu} from './router'
+import Axios from "axios";
 // import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
 // import PageTemplate from "./components/Pagetemplate";
 // import TodoInput from "./components/TodoInput";
@@ -15,6 +16,7 @@ import {Home, About, Menu} from './router'
 // import HooksUseClick from "./components/useClickExample";
 // import {Home, About} from "./router";
 import RSPHooks from "./components/RockPaperScissors";
+import Users from './components/Users';
 
 
 class App extends Component {
@@ -247,6 +249,7 @@ class App extends Component {
                 {/*    <button>입력</button>*/}
                 {/*</form>*/}
                 {/*<div>{this.state.result}</div>*/}
+                <Users/>
             </BrowserRouter>
         )
     }
