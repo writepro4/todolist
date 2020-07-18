@@ -1,7 +1,11 @@
 import React, {Component} from "react";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {Home, About, Menu} from './router'
+import {PostContainer} from './containers'
+import {Header} from "./components";
+
+// import {BrowserRouter, Route, Switch} from 'react-router-dom';
+// import {Home, About, Menu} from './router'
 import Axios from "axios";
+import Post from "./components/Post/Post";
 // import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
 // import PageTemplate from "./components/Pagetemplate";
 // import TodoInput from "./components/TodoInput";
@@ -15,8 +19,9 @@ import Axios from "axios";
 // import HooksUseTitle from "./components/UseTitleExample";
 // import HooksUseClick from "./components/useClickExample";
 // import {Home, About} from "./router";
-import RSPHooks from "./components/RockPaperScissors";
-import Users from './components/Users';
+// import RSPHooks from "./components/RockPaperScissors";
+// import Users from './components/Users';
+
 
 
 class App extends Component {
@@ -225,32 +230,38 @@ class App extends Component {
 
 
         return (
-            <BrowserRouter>
-                <Menu/>
-                <Route exact path="/" component={Home}/>
-                <Switch>
-                    <Route path="/about" component={About}/>
-                    <Route path="/about/:name" component={About}/>
-                </Switch>
+            // <BrowserRouter>
+            //     <Menu/>
+            //     <Route exact path="/" component={Home}/>
+            //     <Switch>
+            //         <Route path="/about" component={About}/>
+            //         <Route path="/about/:name" component={About}/>
+            //     </Switch>
+            //
+            //     <RSPHooks/>
+            //     {/*<div>*/}
+            //     {/*    {this.state.first}곱하기{this.state.second}는?*/}
+            //     {/*    <form onSubmit={this.onSubmit}>*/}
+            //     {/*        <input type="number" value={this.state.value} onChange={this.onChnage}/>*/}
+            //     {/*        <button>입력</button>*/}
+            //     {/*    </form>*/}
+            //     {/*    <div>{this.state.result}</div>*/}
+            //     {/*</div>*/}
+            //
+            //     {/*<div>{this.state.word}</div>*/}
+            //     {/*<form onSubmit={this.onSubmit}>*/}
+            //     {/*    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput}/>*/}
+            //     {/*    <button>입력</button>*/}
+            //     {/*</form>*/}
+            //     {/*<div>{this.state.result}</div>*/}
+            //     <Users/>
+            // </BrowserRouter>
 
-                <RSPHooks/>
-                {/*<div>*/}
-                {/*    {this.state.first}곱하기{this.state.second}는?*/}
-                {/*    <form onSubmit={this.onSubmit}>*/}
-                {/*        <input type="number" value={this.state.value} onChange={this.onChnage}/>*/}
-                {/*        <button>입력</button>*/}
-                {/*    </form>*/}
-                {/*    <div>{this.state.result}</div>*/}
-                {/*</div>*/}
-
-                {/*<div>{this.state.word}</div>*/}
-                {/*<form onSubmit={this.onSubmit}>*/}
-                {/*    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput}/>*/}
-                {/*    <button>입력</button>*/}
-                {/*</form>*/}
-                {/*<div>{this.state.result}</div>*/}
-                <Users/>
-            </BrowserRouter>
+            <div>
+                <Header/>
+                <PostContainer/>
+                <Post/>
+            </div>
         )
     }
 }

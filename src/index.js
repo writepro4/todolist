@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/main.scss'
 import App from './App';
+import 'semantic-ui-css/semantic.min.css';
+import './index.css';
 
-//App.js 렌더링
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
